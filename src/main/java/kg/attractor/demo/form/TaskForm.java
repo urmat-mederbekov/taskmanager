@@ -2,6 +2,7 @@ package kg.attractor.demo.form;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.Future;
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@ToString
 public class TaskForm {
 
     @NotBlank(message = "Обязательное поле")
@@ -23,5 +25,5 @@ public class TaskForm {
 //    @DateTimeFormat( pattern = "dd-MM-yyyy HH:mm")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     @NotNull(message = "Обязательное поле")
-    private LocalDateTime dateTime = null;
+    private LocalDateTime dateTime;
 }

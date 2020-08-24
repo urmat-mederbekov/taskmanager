@@ -5,36 +5,33 @@
             <#if _csrf??>
                 <input type="hidden" name="${(_csrf.parameterName)!'csrf'}" value="${(_csrf.token)!'--no-token--'}"/>
             </#if>
+            <#if errors??>
+                <#assign fieldNames = errors?map(fieldError -> fieldError.field)>
+            </#if>
             <h3 class="text-center">Добавить события</h3>
             <div class="form-group">
-                <input class="form-control" type="text" name="title" placeholder="Тема" autofocus>
-                <#if errors??>
-                    <#list errors as fieldError>
-                        <#if fieldError.field == 'title'>
-                            <div class="alert alert-warning mt-1" role="alert">${fieldError.defaultMessage!'-- no message --'}</div>
-                        </#if>
-                    </#list>
+                <#assign fieldName = "title">
+                <#assign input ='<input class="form-control" type="text" name="title" placeholder="Тема" autofocus>'>
+                <#if errors?? && !fieldNames?seq_contains(fieldName)>
+                    <#assign inputWithValue = '<input class="form-control" type="text" name="title" value="${taskForm.title}" placeholder="Тема" autofocus>'>
                 </#if>
+                <#include "partials/inputErrors.ftlh">
             </div>
             <div class="form-group">
-                <input class="form-control" type="text" name="description" placeholder="Описание">
-                <#if errors??>
-                    <#list errors as fieldError>
-                        <#if fieldError.field == 'description'>
-                            <div class="alert alert-warning mt-1" role="alert">${fieldError.defaultMessage!'-- no message --'}</div>
-                        </#if>
-                    </#list>
+                <#assign fieldName = "description">
+                <#assign input ='<input class="form-control" type="text" name="description" placeholder="Описание">'>
+                <#if errors?? && !fieldNames?seq_contains(fieldName)>
+                    <#assign inputWithValue = '<input class="form-control" type="text" name="description" value="${taskForm.description}"placeholder="Описание">'>
                 </#if>
+                <#include "partials/inputErrors.ftlh">
             </div>
             <div class="form-group">
-                <input class="form-control" type="datetime-local" name="dateTime" placeholder="Дедлайн">
-                <#if errors??>
-                    <#list errors as fieldError>
-                        <#if fieldError.field == 'dateTime'>
-                            <div class="alert alert-warning mt-1" role="alert">${fieldError.defaultMessage!'-- no message --'}</div>
-                        </#if>
-                    </#list>
+                <#assign fieldName = "dateTime">
+                <#assign input ='<input class="form-control" type="datetime-local" name="dateTime" placeholder="Дедлайн">'>
+                <#if errors?? && !fieldNames?seq_contains(fieldName)>
+                    <#assign inputWithValue = '<input class="form-control" type="datetime-local" name="dateTime" value="${taskForm.dateTime}" placeholder="Дедлайн">'>
                 </#if>
+                <#include "partials/inputErrors.ftlh">
             </div>
             <p><button type="submit" class="btn btn-primary w-100">Добавить</button></p>
         </form>

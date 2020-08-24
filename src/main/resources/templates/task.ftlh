@@ -9,7 +9,7 @@
     <div class="row">
         <div class="col">${task.title}</div>
         <div class="col">${task.description}</div>
-        <div class="col">${task.dateTime}</div>
+        <div class="col">${task.dateTime.toLocalDate()} ${task.dateTime.toLocalTime()}</div>
         <div class="col">
             <a href="/tasks/task/${task.id?c}/delete" class="btn btn-danger">Удалить</a>
             <a href="/tasks/task/${task.id?c}/edit" class="btn btn-secondary">Редактировать</a>

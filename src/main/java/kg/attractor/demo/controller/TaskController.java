@@ -55,6 +55,7 @@ public class TaskController {
 
         if (validationResult.hasFieldErrors()) {
             attributes.addFlashAttribute("errors", validationResult.getFieldErrors());
+            attributes.addFlashAttribute("taskForm", taskForm);
             return "redirect:/tasks/add-task";
         }
 

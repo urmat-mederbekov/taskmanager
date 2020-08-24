@@ -15,7 +15,7 @@
                 <div class="col">${task?counter}</div>
                 <div class="col">${task.title}</div>
                 <div class="col">${task.description}</div>
-                <div class="col">${task.dateTime}</div>
+                <div class="col">${task.dateTime.toLocalDate()} ${task.dateTime.toLocalTime()}</div>
                 <#if task.state == "COMPLETED">
                     <div class="col bg-success">${task.state}</div>
                 <#elseif task.state == "NOT_COMPLETED">
