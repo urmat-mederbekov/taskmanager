@@ -1,6 +1,7 @@
 package kg.attractor.demo.service;
 
 import kg.attractor.demo.dto.TaskDTO;
+import kg.attractor.demo.exception.ResourceNotFoundException;
 import kg.attractor.demo.form.TaskForm;
 import kg.attractor.demo.model.Task;
 import kg.attractor.demo.repo.TaskRepo;
@@ -34,11 +35,11 @@ public class TaskService {
     }
 
     public TaskDTO getTaskById(Long id){
-        return TaskDTO.from(taskRepo.findById(id).get());
+        return TaskDTO.from(taskRepo.findById(id).orElseThrow(ResourceNotFoundException::new));
     }
 
     public void editTaskById(Long id, TaskForm taskForm){
-        Task task = taskRepo.findById(id).get();
+        Task task = taskRepo.findById(id).orElseThrow(ResourceNotFoundException::new);
 
         task.setTitle(taskForm.getTitle());
         task.setDescription(taskForm.getDescription());
@@ -48,7 +49,7 @@ public class TaskService {
     }
 
     public void changeTaskState(Long id){
-        Task task = taskRepo.findById(id).get();
+        Task task = taskRepo.findById(id).orElseThrow(ResourceNotFoundException::new);
         task.setState(task.getState().changeState());
         taskRepo.save(task);
     }
